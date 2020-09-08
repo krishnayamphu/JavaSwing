@@ -67,6 +67,11 @@ public class NoteEditor extends javax.swing.JFrame {
 
         jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem2.setText("Save");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem2);
 
         jMenuBar1.add(jMenu1);
@@ -91,13 +96,27 @@ public class NoteEditor extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-      int status=fileChooser.showOpenDialog(this);
-        System.out.println(status);
+      int status=fileChooser.showOpenDialog(this);//0/1
+      if(status==JFileChooser.APPROVE_OPTION){
+          System.out.println("you press open buttn, "+status);
+      }else{
+           System.out.println("you press cancel button, "+status);
+      }
+       
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void fileChooserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fileChooserActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_fileChooserActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+       int status=fileChooser.showSaveDialog(this);//0/1
+      if(status==JFileChooser.APPROVE_OPTION){
+          System.out.println("you press save buttn, "+status);
+      }else{
+           System.out.println("you press cancel button, "+status);
+      }
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     /**
      * @param args the command line arguments
