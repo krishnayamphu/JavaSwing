@@ -5,6 +5,12 @@
  */
 package com.mycompany.javaswing;
 
+import com.mycompany.javaswing.javaio.FileReaderDemo;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 
 /**
@@ -32,7 +38,7 @@ public class NoteEditor extends javax.swing.JFrame {
 
         fileChooser = new javax.swing.JFileChooser();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        myTextBox = new javax.swing.JTextArea();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -50,9 +56,9 @@ public class NoteEditor extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        myTextBox.setColumns(20);
+        myTextBox.setRows(5);
+        jScrollPane1.setViewportView(myTextBox);
 
         jMenu1.setText("File");
 
@@ -98,6 +104,22 @@ public class NoteEditor extends javax.swing.JFrame {
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
       int status=fileChooser.showOpenDialog(this);//0/1
       if(status==JFileChooser.APPROVE_OPTION){
+           FileReader fr;    
+        try {
+            fr = new FileReader(fileChooser.getSelectedFile());
+            int i;   
+            String text="";
+          while((i=fr.read())!=-1)    {
+              text+=(char)i;
+              System.out.print((char)i);  
+          }
+            myTextBox.setText(text);
+          fr.close();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(FileReaderDemo.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(FileReaderDemo.class.getName()).log(Level.SEVERE, null, ex);
+        }
           System.out.println("you press open buttn, "+status);
       }else{
            System.out.println("you press cancel button, "+status);
@@ -154,6 +176,7 @@ public class NoteEditor extends javax.swing.JFrame {
     }
     
     public void myInit(){
+//        myTextBox.setText("put some text.");
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -164,6 +187,6 @@ public class NoteEditor extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextArea myTextBox;
     // End of variables declaration//GEN-END:variables
 }

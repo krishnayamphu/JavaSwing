@@ -166,6 +166,11 @@ public class Calculator extends javax.swing.JFrame {
 
         jButton13.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jButton13.setText("C");
+        jButton13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton13ActionPerformed(evt);
+            }
+        });
 
         jButton14.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jButton14.setText("-");
@@ -334,6 +339,18 @@ public class Calculator extends javax.swing.JFrame {
         HelpDialog d=new HelpDialog(this,true);
         d.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
+        StringBuffer sb=new StringBuffer(txtresult.getText());
+        int len=sb.length();
+        if(len>1){
+            txtresult.setText(String.valueOf(sb.deleteCharAt(len-1)));
+            System.out.println(len);
+        }else{
+            txtresult.setText("0");
+        }
+        
+    }//GEN-LAST:event_jButton13ActionPerformed
 
     /**
      * @param args the command line arguments
