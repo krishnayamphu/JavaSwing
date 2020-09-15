@@ -6,8 +6,10 @@
 package com.mycompany.javaswing;
 
 import com.mycompany.javaswing.javaio.FileReaderDemo;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -57,6 +59,7 @@ public class NoteEditor extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         myTextBox.setColumns(20);
+        myTextBox.setLineWrap(true);
         myTextBox.setRows(5);
         jScrollPane1.setViewportView(myTextBox);
 
@@ -134,7 +137,22 @@ public class NoteEditor extends javax.swing.JFrame {
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
        int status=fileChooser.showSaveDialog(this);//0/1
       if(status==JFileChooser.APPROVE_OPTION){
-          System.out.println("you press save buttn, "+status);
+          FileWriter fw=null;
+           try {
+               File f=fileChooser.getSelectedFile();
+               fw = new FileWriter(f);
+               fw.write(myTextBox.getText());
+               fw.flush();
+               System.out.println("you press save buttn, "+status);
+           } catch (IOException ex) {
+               Logger.getLogger(NoteEditor.class.getName()).log(Level.SEVERE, null, ex);
+           } finally {
+               try {
+                   fw.close();
+               } catch (IOException ex) {
+                   Logger.getLogger(NoteEditor.class.getName()).log(Level.SEVERE, null, ex);
+               }
+           }
       }else{
            System.out.println("you press cancel button, "+status);
       }
