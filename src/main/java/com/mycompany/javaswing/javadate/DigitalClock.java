@@ -5,14 +5,17 @@
  */
 package com.mycompany.javaswing.javadate;
 
+import static java.lang.Thread.sleep;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author User
  */
-public class DigitalClock extends javax.swing.JFrame {
+public class DigitalClock extends javax.swing.JFrame implements Runnable {
 
     /**
      * Creates new form DigitalClock
@@ -20,7 +23,12 @@ public class DigitalClock extends javax.swing.JFrame {
     public DigitalClock() {
         initComponents();
         dateTime();
+        init();
     }
+ public void init(){
+    Thread t=new Thread(this);
+    t.start();
+}
     
     public void dateTime(){
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");  
@@ -115,4 +123,16 @@ public class DigitalClock extends javax.swing.JFrame {
     private javax.swing.JTextField txtDate;
     private javax.swing.JTextField txtTime;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void run() {
+        while(true){
+            dateTime();
+            try {
+                sleep(1000);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(DigitalClock.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
 }
